@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -104,4 +105,112 @@
     loadAppointments();
   </script>
 </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Babita Parlor - Admin Dashboard</title>
+  <style>
+    * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; }
+    body { background-color: #f8f9fa; color: #333; padding: 20px; }
+    header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 20px; border-bottom: 2px solid #e9ecef; margin-bottom: 30px; }
+    h1 { color: #d63384; font-size: 1.8rem; }
+    .refresh-btn { padding: 8px 16px; background: #d63384; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; }
+    .refresh-btn:hover { background: #b02167; }
+
+    .container { max-width: 1100px; margin: 0 auto; }
+    .stats-card { background: white; padding: 20px; border-radius: 8px; border: 1px solid #dee2e6; margin-bottom: 20px; display: inline-block; min-width: 200px; }
+    .stats-card h3 { color: #6c757d; font-size: 0.9rem; text-transform: uppercase; }
+    .stats-card p { font-size: 1.8rem; font-weight: bold; color: #d63384; margin-top: 5px; }
+
+    table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+    th, td { padding: 14px 16px; text-align: left; border-bottom: 1px solid #e9ecef; font-size: 0.95rem; }
+    th { background-color: #f1f3f5; color: #495057; font-weight: 600; }
+    tr:hover { background-color: #f8f9fa; }
+
+    .badge { padding: 4px 10px; border-radius: 12px; font-size: 0.8rem; font-weight: 600; text-transform: capitalize; }
+    .badge-pending { background-color: #fff3cd; color: #856404; }
+    .badge-confirmed { background-color: #d4edda; color: #155724; }
+    .badge-completed { background-color: #cce5ff; color: #004085; }
+    .badge-cancelled { background-color: #f8d7da; color: #721c24; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Babita Beauty Parlor — Admin Dashboard</h1>
+      <button class="refresh-btn" onclick="loadAppointments()">Refresh Bookings</button>
+    </header>
+
+    <div class="stats-card">
+      <h3>Total Bookings</h3>
+      <p id="totalCount">0</p>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Client Name</th>
+          <th>Phone</th>
+          <th>Service</th>
+          <th>Price</th>
+          <th>Date & Time</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="appointmentsTable">
+        <tr><td colspan="7" style="text-align:center;">Loading appointments...</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    async function loadAppointments() {
+      const tbody = document.getElementById('appointmentsTable');
+      const totalCount = document.getElementById('totalCount');
+
+      try {
+        const res = await fetch('/api/appointments');
+        const data = await res.json();
+
+        if (data.status === 'Success') {
+          totalCount.textContent = data.count;
+          
+          if (data.data.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;">No appointments booked yet.</td></tr>';
+            return;
+          }
+
+          tbody.innerHTML = data.data.map(app => {
+            const formattedDate = new Date(app.appointment_date).toLocaleString('en-IN', {
+              dateStyle: 'medium',
+              timeStyle: 'short'
+            });
+
+            return `
+              <tr>
+                <td>#${app.appointment_id}</td>
+                <td><strong>${app.client_name}</strong></td>
+                <td>${app.client_phone}</td>
+                <td>${app.service_name}</td>
+                <td>₹${app.price}</td>
+                <td>${formattedDate}</td>
+                <td><span class="badge badge-${app.status}">${app.status}</span></td>
+              </tr>
+            `;
+          }).join('');
+        }
+      } catch (err) {
+        tbody.innerHTML = '<tr><td colspan="7" style="color:red; text-align:center;">Failed to load appointments.</td></tr>';
+      }
+    }
+
+    loadAppointments();
+  </script>
+</body>
+>>>>>>> b4601a0584d33d907383d5d0562baf9c12a5fceb
 </html>

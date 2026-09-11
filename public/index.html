@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -383,4 +384,391 @@
   </script>
 
 </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Babita Beauty Parlor</title>
+  <style>
+    :root {
+      --primary: #e85a71;
+      --primary-soft: #fdf0f2;
+      --text-dark: #2b2b2b;
+      --text-muted: #666666;
+      --bg-light: #faf7f8;
+      --white: #ffffff;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background-color: var(--bg-light); color: var(--text-dark); line-height: 1.6; }
+
+    /* Header & Navigation */
+    header {
+      background: var(--white);
+      padding: 18px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary); letter-spacing: 1px; }
+    .nav-links { display: flex; gap: 30px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--text-dark); font-weight: 500; font-size: 0.95rem; transition: 0.3s; }
+    .nav-links a:hover { color: var(--primary); }
+    .contact-phone { font-weight: 600; color: var(--text-dark); font-size: 0.95rem; }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+      padding: 80px 8%;
+      border-radius: 0 0 40px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .hero-content { max-width: 500px; }
+    .hero-tag { color: var(--primary); font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+    .hero h1 { font-size: 3rem; color: #2c1820; line-height: 1.2; margin-bottom: 20px; font-weight: 700; }
+    .btn-primary {
+      display: inline-block;
+      background: var(--primary);
+      color: var(--white);
+      padding: 14px 32px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 4px 15px rgba(232, 90, 113, 0.3);
+      transition: 0.3s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(232, 90, 113, 0.4); }
+
+    /* Brands Banner */
+    .brands-section { padding: 40px 8%; background: var(--white); text-align: center; }
+    .brand-logos { display: flex; justify-content: space-around; align-items: center; opacity: 0.7; filter: grayscale(100%); flex-wrap: wrap; gap: 20px; }
+    .brand-logos span { font-weight: 700; font-size: 1.1rem; color: #555; }
+
+    /* Section Styling */
+    .section-title { text-align: center; font-size: 2rem; margin-bottom: 40px; color: var(--text-dark); }
+    .section-title span { color: var(--primary); }
+
+    /* Owner Profile Box */
+    .about-container { padding: 60px 8%; max-width: 900px; margin: 0 auto; }
+    .owner-card { background: var(--white); padding: 35px; border-radius: 20px; box-shadow: var(--shadow); }
+    .owner-card h3 { color: var(--primary); margin-bottom: 15px; font-size: 1.4rem; }
+
+    /* Certificates Gallery Section */
+    .cert-section { padding: 40px 8%; }
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .cert-card {
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid #eee;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .cert-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+    }
+    .cert-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+    }
+    .cert-card p {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      padding: 12px;
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    /* Fullscreen Certificate Popup (Modal Lightbox) */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    .lightbox img {
+      max-width: 90%;
+      max-height: 80vh;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(255,255,255,0.2);
+    }
+    .lightbox caption {
+      color: var(--white);
+      margin-top: 15px;
+      font-size: 1.1rem;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: var(--white);
+      font-size: 2.5rem;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    /* Services Grid */
+    .services-section { padding: 60px 8%; }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 25px; }
+    .service-card {
+      background: var(--white);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      text-align: center;
+      padding-bottom: 20px;
+      transition: 0.3s;
+    }
+    .service-card:hover { transform: translateY(-5px); }
+    .service-card img { width: 100%; height: 200px; object-fit: cover; }
+    .service-card h4 { margin: 15px 0 8px; font-size: 1.1rem; }
+    .service-card p { color: var(--text-muted); font-size: 0.85rem; padding: 0 15px; }
+
+    /* CTA Banner */
+    .cta-banner {
+      margin: 60px 8%;
+      background: var(--primary-soft);
+      padding: 40px;
+      border-radius: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .cta-banner h3 { font-size: 1.5rem; color: var(--text-dark); }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header>
+    <div class="logo">BABITA BEAUTY</div>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#certificates">Certificates</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="contact-phone">📞 +91 98191 71010</div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <div class="hero-tag">Babita Beauty & Salon</div>
+      <h1>Beauty That Reflects You</h1>
+      <a href="#booking" class="btn-primary">Book Your Session</a>
+    </div>
+  </section>
+
+  <!-- Brand Partners -->
+  <section class="brands-section">
+    <div class="brand-logos">
+      <span>L'ORÉAL PARIS</span>
+      <span>KRYOLAN</span>
+      <span>O.P.I</span>
+      <span>DR. PHATE</span>
+      <span>KOSTECH</span>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about-container" id="about">
+    <div class="owner-card">
+      <h3>Your Beauty, Our Passion</h3>
+      <p style="color: var(--text-muted); margin-bottom: 20px; line-height: 1.6;">
+        Welcome to <strong style="color: var(--primary);">BABITA BEAUTY PARLOR</strong>! We offer top-tier 
+        <strong style="color: var(--primary);">Threading, Bleach & Facials, Advanced Skin & Laser Treatments, Hair Care & Treatments, Makeup, Aesthetics & Extensions, Waxing, Manicure & Pedicure, and Complete Bridal Packages</strong> 
+        using international-grade products in a hygienic and relaxing atmosphere.
+      </p>
+      <div style="background: var(--primary-soft); padding: 15px; border-radius: 10px; color: var(--text-dark);">
+        <strong>Experience:</strong> 23+ Years in Professional Cosmetology
+      </div>
+    </div>
+  </section>
+
+  <!-- 19 Certificates Gallery Section -->
+  <section class="cert-section" id="certificates">
+    <h2 class="section-title">Verified <span>Qualifications & Certificates</span></h2>
+    <p style="text-align: center; color: var(--text-muted); margin-bottom: 30px;">Click any certificate image to view full screen</p>
+
+    <div class="cert-grid">
+      <!-- 1 -->
+      <div class="cert-card" onclick="openLightbox('/images/cert1.jpg', 'L\'Oréal Colour Basic Training (Aug 2011)')">
+        <img src="/images/cert1.jpg" alt="Certificate 1">
+        <p>L'Oréal Colour Basic (Aug 2011)</p>
+      </div>
+      <!-- 2 -->
+      <div class="cert-card" onclick="openLightbox('/images/cert2.jpg', 'L\'Oréal Creative Cut Training (Aug 2011)')">
+        <img src="/images/cert2.jpg" alt="Certificate 2">
+        <p>L'Oréal Creative Cut (Aug 2011)</p>
+      </div>
+      <!-- 3 -->
+      <div class="cert-card" onclick="openLightbox('/images/cert3.jpg', 'L\'Oréal Dia Richesse Training (June 2012)')">
+        <img src="/images/cert3.jpg" alt="Certificate 3">
+        <p>L'Oréal Dia Richesse (June 2012)</p>
+      </div>
+      <!-- 4 -->
+      <div class="cert-card" onclick="openLightbox('/images/cert4.jpg', 'Advance Parlour Management Course (Sept 2012)')">
+        <img src="/images/cert4.jpg" alt="Certificate 4">
+        <p>Advance Parlour Management (Sept 2012)</p>
+      </div>
+      <!-- 5 -->
+      <div class="cert-card" onclick="openLightbox('/images/cert5.jpg', 'Kryolan Foundation Make-Up Course (May 2013)')">
+        <img src="/images/cert5.jpg" alt="Certificate 5">
+        <p>Kryolan Make-Up Course (May 2013)</p>
+      </div>
+      <!-- 6 -->
+      <div class="cert-card" onclick="openLightbox('/images/cert6.jpg', 'Bridal Hairstyling Training - SVJ (Sept 2014)')">
+        <img src="/images/cert6.jpg" alt="Certificate 6">
+        <p>Bridal Hairstyling SVJ (Sept 2014)</p>
+      </div>
+      <!-- 7 -->
+      <div class="cert-card" onclick="openLightbox('/images/cert7.jpg', 'OMC Asia Cup Open 2015 - Malaysia')">
+        <img src="/images/cert7.jpg" alt="Certificate 7">
+        <p>OMC Asia Cup Open 2015</p>
+      </div>
+      <!-- 8 -->
+      <div class="cert-card" onclick="openLightbox('/images/cert8.jpg', 'Basic Training in Electro Therapy (Feb 2016)')">
+        <img src="/images/cert8.jpg" alt="Certificate 8">
+        <p>Electro Therapy Training (Feb 2016)</p>
+      </div>
+      <!-- 9 -->
+      <div class="cert-card" onclick="openLightbox('/images/cert9.jpg', 'Advanced Course in Aromatherapy (Aug 2016)')">
+        <img src="/images/cert9.jpg" alt="Certificate 9">
+        <p>Aromatherapy Course (Aug 2016)</p>
+      </div>
+      <!-- 10 -->
+      <div class="cert-card" onclick="openLightbox('/images/cert10.jpg', 'Nail Art Workshop (Oct 2016)')">
+        <img src="/images/cert10.jpg" alt="Certificate 10">
+        <p>Nail Art Workshop (Oct 2016)</p>
+      </div>
+      <!-- 11 -->
+      <div class="cert-card" onclick="openLightbox('/images/cert11.jpg', 'Certified Master Entrepreneur (Feb 2019)')">
+        <img src="/images/cert11.jpg" alt="Certificate 11">
+        <p>Master Entrepreneur (Feb 2019)</p>
+      </div>
+      <!-- 12 -->
+      <div class="cert-card" onclick="openLightbox('/images/cert12.jpg', 'Bijal Gada 5 Days Make-Up Masterclass (Oct 2023)')">
+        <img src="/images/cert12.jpg" alt="Certificate 12">
+        <p>Bijal Gada Make-Up Masterclass (Oct 2023)</p>
+      </div>
+      <!-- 13 -->
+      <div class="cert-card" onclick="openLightbox('/images/cert13.jpg', 'Red Carpet Runway 2024 (Makeup & Hair)')">
+        <img src="/images/cert13.jpg" alt="Certificate 13">
+        <p>Red Carpet Runway 2024</p>
+      </div>
+      <!-- 14 -->
+      <div class="cert-card" onclick="openLightbox('/images/cert14.jpg', 'HSM International Makeup & Hairstyle (Sept 2024)')">
+        <img src="/images/cert14.jpg" alt="Certificate 14">
+        <p>HSM Makeup & Hairstyle (Sept 2024)</p>
+      </div>
+      <!-- 15 -->
+      <div class="cert-card" onclick="openLightbox('/images/cert15.jpg', 'Scientific Cosmetology - Dr. Rahul Phate (Sept 2024)')">
+        <img src="/images/cert15.jpg" alt="Certificate 15">
+        <p>Scientific Cosmetology (Sept 2024)</p>
+      </div>
+      <!-- 16 -->
+      <div class="cert-card" onclick="openLightbox('/images/cert16.jpg', 'Aesthetic Beauty Workshop - KOSTECH (July 2025)')">
+        <img src="/images/cert16.jpg" alt="Certificate 16">
+        <p>KOSTECH Aesthetic Beauty (July 2025)</p>
+      </div>
+      <!-- 17 -->
+      <div class="cert-card" onclick="openLightbox('/images/cert17.jpg', 'PISHAA Eyelash Extension Training (March 2026)')">
+        <img src="/images/cert17.jpg" alt="Certificate 17">
+        <p>PISHAA Eyelash Extensions (March 2026)</p>
+      </div>
+      <!-- 18 -->
+      <div class="cert-card" onclick="openLightbox('/images/cert18.jpg', 'Advanced Hair & Skin Therapy Certification')">
+        <img src="/images/cert18.jpg" alt="Certificate 18">
+        <p>Advanced Hair & Skin Therapy</p>
+      </div>
+      <!-- 19 -->
+      <div class="cert-card" onclick="openLightbox('/images/cert19.jpg', 'Master Cosmetology & Aesthetics Certification')">
+        <img src="/images/cert19.jpg" alt="Certificate 19">
+        <p>Master Cosmetology & Aesthetics</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox Popup Container -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close">&times;</span>
+    <img id="lightbox-img" src="" alt="Full Certificate View">
+    <caption id="lightbox-caption"></caption>
+  </div>
+
+  <!-- Explore Our Services -->
+  <section class="services-section" id="services">
+    <h2 class="section-title">Explore Our <span>Services</span></h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=500&q=80" alt="Hair Care">
+        <h4>Hair Care & Styling</h4>
+        <p>Coloring, haircuts, treatments & creative styling.</p>
+      </div>
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=500&q=80" alt="Makeup">
+        <h4>Professional Makeup</h4>
+        <p>Bridal, party & special occasion looks.</p>
+      </div>
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=500&q=80" alt="Skin Care">
+        <h4>Advanced Skin Care</h4>
+        <p>Facials, electro-therapy & aesthetic treatments.</p>
+      </div>
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=500&q=80" alt="Nail Services">
+        <h4>Nail Art & Extensions</h4>
+        <p>Manicure, pedicure & professional nail enhancements.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Appointment Banner -->
+  <section class="cta-banner" id="booking">
+    <div>
+      <h3>Ready to feel beautiful?</h3>
+      <p style="color: var(--text-muted);">Book your appointment today and let us pamper you.</p>
+    </div>
+    <a href="tel:+919819171010" class="btn-primary">Book Appointment →</a>
+  </section>
+
+  <!-- Lightbox Script -->
+  <script>
+    function openLightbox(imgSrc, captionText) {
+      document.getElementById('lightbox-img').src = imgSrc;
+      document.getElementById('lightbox-caption').innerText = captionText;
+      document.getElementById('lightbox').style.display = 'flex';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
+    }
+  </script>
+
+</body>
+>>>>>>> b4601a0584d33d907383d5d0562baf9c12a5fceb
 </html>
